@@ -1,12 +1,7 @@
 s = input()
 arr = ['c=','c-','dz=','d-','lj','nj','s=','z=']
-cnt = 0
 
-for i in range(len(arr)):
-    cnt+=s.count(arr[i])
-    if arr[i] in s:
-        s = s.replace(arr[i],' ')
-s = s.replace(' ','')
-cnt += len(s)
+for i in arr:
+    s = s.replace(i,'*')
 
-print(cnt)
+print(len(s))
