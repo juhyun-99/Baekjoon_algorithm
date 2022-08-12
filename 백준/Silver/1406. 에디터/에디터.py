@@ -18,3 +18,6 @@ for i in range(n):
         stack_l.append(command[1])
 
 print("".join(stack_l + list(reversed(stack_r))))
+#마지막에 stack2를 뒤집어주는 과정에서 반드시 st2.reverse() 가 아닌 reversed(st2) 를 사용해줘야한다.
+#만약 모든 명령이 끝난 후 st2에 값이 아무것도 존재하지 않는다면 st2.reverse() 는 TypeError를 띄우기 때문이다.
+#반면에 reversed(st2) 는 st2에 값이 존재하지 않더라도 오류를 띄우지 않고 우리가 생각한대로 잘 작동한다.
