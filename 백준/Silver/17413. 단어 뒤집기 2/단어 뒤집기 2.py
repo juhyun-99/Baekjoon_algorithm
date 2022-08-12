@@ -7,7 +7,6 @@ while i<len(S):
         if stack:
             while stack:
                 print(stack.pop(),end='')
-        ii = S.index('>')
         print(*S[i:S.index('>')+1],sep='',end='')
         del S[i:S.index('>')+1]
     elif S[i] != ' ' and S[i] != '<' and S[i] != '>':
