@@ -9,10 +9,7 @@ for i in range(len(num1)):
 while len(s) > 2:
     new = ''
     for i in range(len(s)-1):
-        ss = str(int(s[i])+int(s[i+1]))
-        if len(ss)==2:
-            new +=ss[1]
-        else:
-            new +=ss[0]
+        ss = int(s[i])+int(s[i+1])
+        new += str(ss%10)
     s = new
 print(s)
