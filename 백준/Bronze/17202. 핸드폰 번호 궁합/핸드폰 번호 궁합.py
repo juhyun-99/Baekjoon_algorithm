@@ -1,6 +1,5 @@
 import sys; input=sys.stdin.readline
-dp = [0]*91
-dp[1] = 1; dp[2]=1
+
 num1 = input().rstrip()
 num2 = input().rstrip()
 s = ''
