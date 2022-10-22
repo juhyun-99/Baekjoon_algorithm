@@ -10,5 +10,6 @@ for tc in range(1, T + 1):
     for i in ss.values():
         if i != 2:
             ans = "No"
+            break
 
     print(f"#{tc} {ans}")
