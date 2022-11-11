@@ -25,25 +25,8 @@ for i in range(n):
     elif g2 > g1:
         g2_t += g[i + 1] - g[i]
 
-g1_m = ''
-if len(str(g1_t // 60)) == 1:
-    g1_m = '0'+str(g1_t // 60) + ':'
-else:
-    g1_m = str(g1_t // 60) + ':'
-if len(str(g1_t % 60)) == 1:
-    g1_m += '0' + str(g1_t % 60)
-else:
-    g1_m += str(g1_t % 60)
-
-g2_m = ''
-if len(str(g2_t // 60)) == 1:
-    g2_m = '0'+str(g2_t // 60) + ':'
-else:
-    g2_m = str(g2_t // 60) + ':'
-if len(str(g2_t % 60)) == 1:
-    g2_m += '0' + str(g2_t % 60)
-else:
-    g2_m += str(g2_t % 60)
+g1_m = str(g1_t//60).zfill(2) +':' + str(g1_t%60).zfill(2)
+g2_m = str(g2_t//60).zfill(2) +':' + str(g2_t%60).zfill(2)
 
 print(g1_m)
 print(g2_m)
