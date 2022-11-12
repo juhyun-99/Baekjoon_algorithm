@@ -4,7 +4,6 @@ input = sys.stdin.readline
 
 M, N, H = map(int,input().split())
 tomato = [[list(map(int,input().split())) for _ in range(N)] for _ in range(H)]
-visit = [[[0] * M for _ in range(N)]for _ in range(H)]
 day = [[[0] * M for _ in range(N)]for _ in range(H)]
 q = deque([])
 cnt = 0
@@ -23,13 +22,11 @@ for i in range(H):
 ans = 0
 while q:
     z, x, y = q.popleft()
-    visit[z][x][y] = 1
     for i in range(6):
         nx = x + dx[i]
         ny = y + dy[i]
         nz = z + dz[i]
-        if (0 <= nx < N and 0 <= ny < M and 0 <= nz < H) and visit[nz][nx][ny] == 0 and tomato[nz][nx][ny] == 0:
-            visit[nz][nx][ny] = 1
+        if (0 <= nx < N and 0 <= ny < M and 0 <= nz < H) and tomato[nz][nx][ny] == 0:
             tomato[nz][nx][ny] = 1
             day[nz][nx][ny] = day[z][x][y] + 1
             ans = max(ans, day[nz][nx][ny])
