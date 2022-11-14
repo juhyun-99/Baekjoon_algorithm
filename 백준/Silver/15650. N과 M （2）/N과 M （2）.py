@@ -1,15 +1,14 @@
-n, m = list(map(int, input().split()))
+N, M = map(int,input().split())
+
 s = []
-
-
-def dfs(start):
-    if len(s) == m:
-        print(' '.join(map(str, s)))
+def dfs(num):
+    if len(s) == M:
+        print(*s)
         return
-
-    for i in range(start, n + 1):
-        if i not in s:
+    else:
+        for i in range(num + 1, N + 1):
             s.append(i)
-            dfs(i + 1)
+            dfs(i)
             s.pop()
-dfs(1)
+dfs(0)
+
