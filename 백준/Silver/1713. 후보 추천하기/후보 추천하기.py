@@ -19,21 +19,10 @@ for i in arr:
             s[i] = s.get(i, 0) + 1 # 추천 받은 횟수 증가
         else:
             ss = [s[a[j]] for j in range(len(a))] #가장 작은 값 찾기
-            cnt = 0
-            for j in ss:
-                if j == min(ss):
-                    cnt += 1
-            if cnt >= 2: # 추천횟수가 가장 작은게 두개이면
-                idx = ss.index(min(ss))
-                s[a[idx]] = 0
-                del a[idx]
-                a.append(i)
-                s[i] = s.get(i, 0) + 1
-            else:
-                idx = ss.index(min(ss))
-                s[a[idx]] = 0
-                del a[idx]
-                a.append(i)
-                s[i] = s.get(i, 0) + 1
+            idx = ss.index(min(ss))
+            s[a[idx]] = 0
+            del a[idx]
+            a.append(i)
+            s[i] = s.get(i, 0) + 1
 a.sort()
 print(*a)
