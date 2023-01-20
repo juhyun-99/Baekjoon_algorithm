@@ -17,25 +17,24 @@ for ss in range(t):
 
     s = sum(arr) # 배열의 합
     num = f(s) # 합의 약수 배열
-    num.sort(reverse = True)
+    num.sort()
 
     ans = 0
-    for i in num: #큰 약수부터 돌림 왜? - num//약수개 만큼 숫자가 남는데 약수가 클수록 합치는 횟수가 많다
-        tmp = s // i  # 원소들의 합이 되어야할 값
-        arrsum = 0  # 원소들의 합
+    for i in num:
+        arrsum = 0
         tf = True
 
         for j in range(n):
             arrsum += arr[j]
-            if arrsum > tmp:
+            if arrsum > i:
                 tf = False
                 break
 
-            elif arrsum == tmp:
+            elif arrsum == i:
                 arrsum = 0
 
         if tf:
-            ans = n - i
+            ans = n - (s//i)
             break
 
     print(ans)
