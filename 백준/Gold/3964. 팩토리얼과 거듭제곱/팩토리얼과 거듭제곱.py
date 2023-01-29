@@ -1,37 +1,40 @@
-# m은 소인수분해가 필요하고
-# n은 m의 소인수분해 한 것의 값들이 몇개가 있는지 찾아야함
 import sys
 
 input = sys.stdin.readline
-t = int(input())
+
+def factorization(x):
+    for i in range(2, int(x ** 0.5) + 1):
+        while x % i == 0:
+            div.append(i)
+            x //= i
+    if x != 1:
+        div.append(x)
 
 
-def f(num, di):
-    for i in range(2, int(num ** 0.5) + 1):
-        while num % i == 0:
-            di[i] = di.get(i, 0) + 1
-            num //= i
-    if num != 1:
-        di[num] = di.get(num, 0) + 1
-
-
-for _ in range(t):
-    dic_n = {}
-    dic_k = {}
+for t in range(int(input())):
     n, k = map(int, input().split())
-    f(k, dic_k)
-    ans = 999999999999999999
-    #print(dic_k)
 
-    for i in dic_k:
-        tmp = i
-        while n >= tmp:
-            dic_n[i] = dic_n.get(i, 0) + (n // tmp)
-            tmp *= i
+    tmp = 0
+    number = k + 0
+    div = []
 
-        if dic_n.get(i, 0) < dic_k[i]:
-            ans = 0
-            break
-        else:
-            ans = min(ans, dic_n[i] // dic_k[i])
-    print(ans)
+    # k를 소인수분해하기
+    factorization(k)
+
+    #print(div)
+    div2 = list(set(div))
+    # 소인수 분해한걸 배열에 담아서 하나씩 계산해주기
+    answer = []
+
+    for a in range(len(div2)):
+        t = div2[a]
+        tmp = 0
+        while n >= t:
+            tmp += n//t
+            t*=div2[a]
+        #print(tmp)
+
+        #print(div.count(div2[a]))
+        answer.append(tmp//div.count(div2[a]))
+
+    print(min(answer))
