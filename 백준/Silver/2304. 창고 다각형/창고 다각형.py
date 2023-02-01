@@ -1,25 +1,22 @@
 import sys
 input = sys.stdin.readline
+n = int(input())
 
-N = int(input())
+arr = [0] * 1001
+left = [0] * 1001
+right = [0] * 1002
+m_a = 0
+for i in range(n):
+    a, b = map(int,input().split())
+    m_a = max(m_a, a)
+    arr[a] = b
 
-arr = [0 for _ in range(1001)]
-
-for _ in range(N):
-    N, L = map(int, input().split())
-    arr[N] = L
-
-idx = arr.index(max(arr))
-
-num = 0
+for i in range(1, m_a + 1):
+    left[i] = max(left[i - 1], arr[i])
+for i in range(m_a, 0, -1):
+    right[i] = max(right[i + 1], arr[i])
 ans = 0
-for i in range(idx + 1):
-    num = max(num, arr[i])
-    ans += num
-
-num = 0
-for i in range(1000, idx, -1):
-    num = max(num, arr[i])
-    ans += num
+for i in range(1, m_a + 1):
+    ans += min(left[i], right[i])
 
 print(ans)
