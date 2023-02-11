@@ -1,23 +1,23 @@
-import math
 import sys
+input = sys.stdin.readline
 
-def f(num):
-    for k in range(2,int(math.sqrt(num)+1)):
-        if num%k==0:
-            return False
-            break
-    return True
+arr = [True] * 1000001
+arr[1] = False
 
+#에라토스테네스
+for i in range(2, int(1000000**0.5) + 1):
+    if not arr[i]:
+        continue
+    for j in range(i*i,1000001,i):
+        arr[j] = False
+
+pr = ''
 while True:
-    n = int(sys.stdin.readline().rstrip())
-    tf = False
-    if n==0:
+    n = int(input())
+    if n == 0:
         break
-    for k in range(3,n,2):
-        if f(k) and f(n-k):
-            print(f'{n} = {k} + {n-k}')
-            tf = True
+    for k in range(3, n//2 + 1, 2):
+        if arr[k] and arr[n - k]: #k도 True, n-k도 True이면
+            print(f'{n} = {k} + {n - k}')
             break
-    if tf==False:
-        print("Goldbach's conjecture is wrong.")
-        
+print(pr)
