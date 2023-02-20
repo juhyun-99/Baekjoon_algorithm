@@ -50,8 +50,6 @@ def arr1_arr():
             nx = x + dx1[d]
             ny = y + dy1[d]
         x, y = nx, ny
-    arr1.reverse()
-
 
 def destroy(d, s):  # 파괴
     x, y = n // 2, n // 2
