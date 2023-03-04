@@ -1,20 +1,23 @@
-N, M = map(int, input().split())
+import sys
+input = sys.stdin.readline
 
-trees = list(map(int, input().split()))
+n, m = map(int, input().split())
+arr = list(map(int, input().split()))
 
-left, right = 0, max(trees)
+start = 0
+end = max(arr)
 
-while left <= right:
-    mid = (left + right) // 2
-    total = 0
+while start <= end:
+    mid = (start + end) // 2
+    cnt = 0
+    for tree in arr:
+        if tree > mid:
+            cnt += tree - mid
 
-    for tree in trees:
-        if tree >= mid:
-            total += tree - mid
+    if cnt >= m:
+        start = mid + 1
 
-    if total >= M:
-        left = mid + 1
     else:
-        right = mid - 1
+        end = mid - 1
 
-print(right)
+print(end)
