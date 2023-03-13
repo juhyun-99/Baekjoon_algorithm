@@ -1,21 +1,26 @@
-def possible(x):
-    for i in range(x):
-        if queen[i] == queen[x] or abs(x - i) == abs(queen[x] - queen[i]):
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+arr = [0] * n
+ans = 0
+def check(num):
+    for i in range(num):
+        if arr[i] == arr[num] or abs(num - i) == abs(arr[num] - arr[i]):
             return False
     return True
 
-def q(x):
+def dfs(num):
     global ans
-    if x == n:
+
+    if num == n:
         ans += 1
         return
-    for i in range(n):
-        queen[x] = i
-        if possible(x):
-            q(x + 1)
 
-n = int(input())
-queen = [0] * n
-ans = 0
-q(0)
+    for i in range(n):
+        arr[num] = i
+        if check(num):
+            dfs(num + 1)
+
+dfs(0)
 print(ans)
