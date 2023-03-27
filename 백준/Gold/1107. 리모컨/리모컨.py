@@ -1,4 +1,3 @@
-#완전탐색 생각
 import sys
 input = sys.stdin.readline
 
@@ -40,7 +39,7 @@ if 0 < bnum < 10:
         if tr:
             m2 = i
             break
-    # print(ch_check,m1,m2)
+
     
     if ch_check:
         print(min(len(ch), abs(int(ch) - 100)))
@@ -54,10 +53,10 @@ if 0 < bnum < 10:
         print(a)
 
 
-elif bnum == 10: #모두 고장난 버튼
+elif bnum == 10:
     print(abs(int(ch) - 100))
     sys.exit()
 
-else: #고장난 버튼이 하나도 없을 때
+else: 
     print(min(len(ch), abs(100 - int(ch))))
     sys.exit()
