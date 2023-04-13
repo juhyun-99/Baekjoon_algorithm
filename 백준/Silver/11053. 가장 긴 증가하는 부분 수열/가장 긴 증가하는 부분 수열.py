@@ -1,5 +1,9 @@
+import sys
+input = sys.stdin.readline
+
 n = int(input())
-arr = list(map(int,input().split()))
+arr = list(map(int,input().rstrip().split()))
+
 dp = [0] * n
 dp[0] = 1
 
