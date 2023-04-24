@@ -1,7 +1,9 @@
-import sys; input = sys.stdin.readline
+import sys
+input = sys.stdin.readline
 
 n = int(input())
-graph = [[]*i for i in range(n+1)]
+graph = [[]*i for i in range(n + 1)]
+
 a,b = map(int,input().split())
 m = int(input())
 
@@ -10,9 +12,8 @@ for _ in range(m):
     graph[n1].append(n2)
     graph[n2].append(n1)
 
-
-visit = [0]*(n+1)
-chon = [0]*(n+1)
+visit = [0]*(n + 1)
+chon = [0]*(n + 1)
 
 def dfs(v):
     visit[v] = 1
@@ -22,6 +23,7 @@ def dfs(v):
             dfs(i)
 
 dfs(a)
-if chon[b]==0:
+if chon[b] == 0:
     print(-1)
-else: print(chon[b])
+else:
+    print(chon[b])
