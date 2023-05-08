@@ -1,21 +1,23 @@
-T = int(input())
+tc = int(input())
 
-for tc in range(1, T + 1):
-    N, M, K = map(int, input().split())
-    arr = list(map(int, input().split()))
-    make = 0
+for t in range(tc):
+    n, m, k = map(int,input().split())
+    p = list(map(int,input().split()))
+    bread = 0
     tf = True
-    for i in range(max(arr) + 1):
-        if i != 0 and i % M == 0:
-            make += K
-        if i in arr:
-            if make > 0:
-                make -= 1
-            else:
+    for i in range(max(p) + 1):
+        if i != 0 and i % m == 0:
+            bread += k
+        if i in p:
+            if bread < 1:
                 tf = False
-                break
-
+            else:
+                bread -= 1
+        if not tf:
+            break
+    ans = ''
     if tf:
-        print(f'#{tc} Possible')
+        ans = 'Possible'
     else:
-        print(f'#{tc} Impossible')
+        ans = 'Impossible'
+    print(f'#{t + 1} {ans}')
