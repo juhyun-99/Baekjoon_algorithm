@@ -1,27 +1,25 @@
+tc = int(input())
 
-T = int(input())
-def dfs(i, num):
-    global s
-    visit[i] = 1
-    s = max(num, s)
-    for j in arr[i]:
-        if visit[j] == 0:
-            dfs(j, num + 1)
-            visit[j] = 0
+def dfs(i, cnt):
+    global ans
+    visit[i] = True
+    ans = max(ans, cnt)
+    for j in graph[i]:
+        if not visit[j]:
+            dfs(j, cnt + 1)
+            visit[j] = False
+for t in range(tc):
+    n, m = map(int,input().split())
+    arr = [0] * (n + 1)
+    graph = [[] for _ in range(n + 1)]
 
-for tc in range(1, T + 1):
-    N, M = map(int, input().split())
-
-    arr = [[] for _ in range(N + 1)]
-    for i in range(M):
-        x, y = map(int, input().split())
-        arr[x].append(y)
-        arr[y].append(x)
-
-    s = 0
-    for i in range(1, N + 1):
-        visit = [0] * (N + 1)
+    for _ in range(m):
+        x, y = map(int,input().split())
+        graph[x].append(y)
+        graph[y].append(x)
+    ans = 0
+    for i in range(1, n + 1):
+        visit = [False] * (n + 1)
         dfs(i, 1)
 
-
-    print(f'#{tc} {s}')
+    print(f'#{t + 1} {ans}')
