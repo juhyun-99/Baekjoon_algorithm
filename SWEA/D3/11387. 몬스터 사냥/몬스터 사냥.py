@@ -1,8 +1,9 @@
-T = int(input())
+t = int(input())
 
-for tc in range(1, T + 1):
-    D, L, N = map(int,input().split())
-    cnt = 0
-    for i in range(N):
-        cnt+= D * (1 + i * (L * 0.01))
-    print(f'#{tc}',int(cnt))
+for tc in range(1, t + 1):
+    d, l, n = map(int, input().split())
+    ans = 0
+    for i in range(n):
+        ans += d * (1 + (i * l * 0.01))
+    ans = int(ans)
+    print(f'#{tc} {ans}')
