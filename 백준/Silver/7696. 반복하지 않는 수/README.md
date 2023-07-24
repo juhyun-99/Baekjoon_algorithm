@@ -1,14 +1,14 @@
-# [Silver IV] 반복하지 않는 수 - 7696 
+# [Silver III] 반복하지 않는 수 - 7696 
 
 [문제 링크](https://www.acmicpc.net/problem/7696) 
 
 ### 성능 요약
 
-메모리: 189972 KB, 시간: 3972 ms
+메모리: 15660 KB, 시간: 664 ms
 
 ### 분류
 
-브루트포스 알고리즘(bruteforcing), 구현(implementation)
+브루트포스 알고리즘, 구현
 
 ### 문제 설명
 
