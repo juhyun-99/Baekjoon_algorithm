@@ -9,7 +9,6 @@ public class Main {
 	static int[] dy = {1,1,1};
 	static int r, c;
 	static char[][] arr;
-	static boolean[][] visit;
 	static boolean tf;
 	static int cnt = 0;
 	public static void main(String[] args) throws IOException {
@@ -22,7 +21,6 @@ public class Main {
 		c = Integer.parseInt(st.nextToken());
 		
 		arr = new char[r][c];
-		visit = new boolean[r][c];
 		for (int i = 0; i < r; i++) {
 			arr[i] = br.readLine().toCharArray();
 		}
@@ -60,7 +58,7 @@ public class Main {
 		for (int i = 0; i < 3; i++) {
 			int nx = x + dx[i];
 			int ny = y + dy[i];
-			if(0 <= nx && nx < r && 0 <=ny && ny < c && arr[nx][ny] == '.' && !visit[nx][ny]) {
+			if(0 <= nx && nx < r && 0 <=ny && ny < c && arr[nx][ny] == '.') {
 				//System.out.printf("%d %d %c\n",nx, ny, arr[nx][ny]);
 				arr[nx][ny] = 'o';
 				dfs(nx, ny);
