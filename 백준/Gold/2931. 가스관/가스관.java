@@ -33,39 +33,58 @@ public class Main {
     static char ansChar; //.이었던 길을 어떤 길로 변경했을 때 그 변경한 길을 저장할 변수
     static int cnt;
     public static void main(String[] args) throws NumberFormatException, IOException {
-        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
+        st = new StringTokenizer(br.readLine());
+        r = Integer.parseInt(st.nextToken());
+        c = Integer.parseInt(st.nextToken());
+        arr = new char[r][c];
         
-        
-            st = new StringTokenizer(br.readLine());
-            r = Integer.parseInt(st.nextToken());
-            c = Integer.parseInt(st.nextToken());
-            arr = new char[r][c];
-            
-            
-            for (int i = 0; i < r; i++) {
-                arr[i] = br.readLine().toCharArray();
-                for (int j = 0; j < c; j++) {
-                    if(arr[i][j] == 'M') {//집 일때
-                        sx = i; sy = j; //집 좌표 저장
-                    }else if(arr[i][j] == 'Z') {//유치원일때
-                        ex = i; ey = j; //유치원 좌표 저장
-                    }
-                    if(arr[i][j] !='.') {
-                    	if(arr[i][j] == '+') {
-                    		cnt++;
-                    	}
-                        cnt++; //지나갈 길 갯수 저장
-                    }
+        for (int i = 0; i < r; i++) {
+            arr[i] = br.readLine().toCharArray();
+            for (int j = 0; j < c; j++) {
+                if(arr[i][j] == 'M') {//집 일때
+                    sx = i; sy = j; //집 좌표 저장
+                }else if(arr[i][j] == 'Z') {//유치원일때
+                    ex = i; ey = j; //유치원 좌표 저장
+                }
+                if(arr[i][j] !='.') {
+                   if(arr[i][j] == '+') {
+                      cnt++;
+                   }
+                    cnt++; //지나갈 길 갯수 저장
                 }
             }
-            cnt-=2;
-            //System.out.println(cnt);
-            bfs();
-            System.out.printf("%d %d %c\n" ,ansx, ansy, ansChar);
+        }
+        cnt-=2;//유치원이랑 집 뺌
+        //System.out.println(cnt);
+        bfs();
+        System.out.printf("%d %d %c\n" ,ansx, ansy, ansChar);
 
     }
+    
+    private static int check(int d, char c) {
+    	//우하좌상
+    	if(d == 0) {
+            if(c == '-' || c =='+') return 0;
+            else if(c == '3') return 3;
+            else if(c == '4')return 1;
+         }else if(d == 1) {
+            if(c == '|' || c =='+') return 1;
+            else if(c == '2') return 0;
+            else if(c == '3') return 2;
+         }else if(d == 2) {
+            if(c== '-' || c =='+') return 2;
+            else if(c == '1') return 1;
+            else if(c == '2') return 3;
+         }else {
+            if(c== '|' || c =='+') return 3;
+            else if(c == '1') return 0;
+            else if(c == '4') return 2;
+         }
+  		return -1;
+  	}
+    
     private static void bfs() {
         Queue<Point> q = new LinkedList<>();
         for (int i = 0; i < 4; i++) {
@@ -75,26 +94,11 @@ public class Main {
             //우, 하, 좌, 상
             int d = 0;
             if(0 <= nx && nx < r && 0<= ny && ny < c) { //가장 처음 집에서 연결되어 있는 길과 방향을 확안해서 큐에 넣어준다.
-                if(arr[nx][ny] != '.') {
-                	if(i == 0) {
-                		if(arr[nx][ny] == '-' || arr[nx][ny] =='+') d = i;
-                		else if(arr[nx][ny] == '3') d = 3;
-                		else if(arr[nx][ny] == '4') d = 1;
-                	}else if(i == 1) {
-                		if(arr[nx][ny] == '|' || arr[nx][ny] =='+') d = i;
-                		else if(arr[nx][ny] == '2') d = 0;
-                		else if(arr[nx][ny] == '4') d = 2;
-                	}else if(i == 2) {
-                		if(arr[nx][ny] == '-' || arr[nx][ny] =='+') d = i;
-                		else if(arr[nx][ny] == '1') d = 1;
-                		else if(arr[nx][ny] == '2') d = 3;
-                	}else {
-                		if(arr[nx][ny] == '|' || arr[nx][ny] =='+') d = i;
-                		else if(arr[nx][ny] == '1') d = 0;
-                		else if(arr[nx][ny] == '4') d = 2;
-                	}
-                    q.add(new Point(nx, ny, d,'*', 0, 1));
-                    break;
+                if(arr[nx][ny] != '.'){ 
+                   d = check(i, arr[nx][ny]);
+                   if(d == -1) continue;
+                   q.add(new Point(nx, ny, d,'*', 0, 1));
+                   break;
                 }
             }
         }
@@ -174,34 +178,12 @@ public class Main {
                     }
                 }
                 break;
-            case '+' : case '|': case '-': //+, |, -일때는 그 전 방향 그대로 지나감
-                direct = p.d;
-                q.add(new Point(nx, ny, direct,p.ans ,p.cnt, p.sum + 1));
-                break;
-            //단 길이 1,2,3,4일때는 그 전 방향이 어떤 방향이었는지 따라서 방향이 바뀌기 때문에 방향을 바꿔서 넣어준다.
-            case '1':
-                if(p.d == 3) direct = 0; //상 -> 우
-                if(p.d == 2) direct = 1; //좌 -> 하
-                q.add(new Point(nx, ny, direct,p.ans , p.cnt, p.sum + 1));
-                break;
-            case '2' :
-                if(p.d == 1) direct = 0; //하 -> 우
-                if(p.d == 2) direct = 3; //좌 -> 위
-                q.add(new Point(nx, ny, direct,p.ans , p.cnt, p.sum + 1));
-                break;
-            case '3':
-                if(p.d == 0) direct = 3; //우 -> 위
-                if(p.d == 1) direct = 2; //하 -> 좌
-                q.add(new Point(nx, ny, direct,p.ans , p.cnt, p.sum + 1));
-                break;
-            case '4':
-                if(p.d == 0) direct = 1; //우 -> 하
-                if(p.d == 3) direct = 2; //상 -> 좌
-                q.add(new Point(nx, ny, direct,p.ans , p.cnt, p.sum + 1));
-                break;
-                
+            case '+' : case '|': case '-': case '1': case '2': case '3': case '4': //+, |, -일때는 그 전 방향 그대로 지나감
+            	direct = check(p.d, arr[nx][ny]);
+            	if(direct != -1)          		
+            		q.add(new Point(nx, ny, direct, p.ans , p.cnt, p.sum + 1));
+            	break;
             }
-            
         }
     }
 }
