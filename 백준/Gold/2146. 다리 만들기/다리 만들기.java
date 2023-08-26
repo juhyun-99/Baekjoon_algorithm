@@ -65,57 +65,55 @@ public class Main {
 //		}
 		
 		int ans = Integer.MAX_VALUE;
-		//섬이 1번 0번 바다
-		for (int i = 1; i < num ; i++) {
-			visit = new boolean[n][n];
-			ans = Math.min(ans, checkDist(i));
+
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				if(arr[i][j] > 0) {
+					visit = new boolean[n][n];
+					ans = Math.min(ans, checkDist(i,j));
+				}
+			}
 		}
 
 		System.out.println(ans);
 	}
-	private static int checkDist(int i) {
-		int tmp = Integer.MAX_VALUE;
+	
+	private static int checkDist(int i, int j) {
 		Queue<Point> q = new LinkedList<>();
-
-		int num = i; //섬번호
-		while(!queue.isEmpty()) {
-			Point pp = queue.peek();
-			if(arr[pp.x][pp.y] != num) break;
-			
-			Point p = queue.poll();
-			int x = p.x;
-			int y = p.y;
-			q.add(p);
-			visit[x][y] = true;
-		}
-		
+		q.add(new Point(i,j));
+		int num = arr[i][j]; //섬번호
+		int number = 0;
+		visit[i][j] = true;
 		while(!q.isEmpty()) {
-			Point p = q.poll();
-			int x = p.x;
-			int y = p.y;
-			for (int k = 0; k < 4; k++) {
-				int nx = x + dx[k];
-				int ny = y + dy[k];
-				if(0<= nx && nx < n && 0<= ny && ny < n && !visit[nx][ny] && arr[nx][ny] != num){
-					if(arr[nx][ny] == 0) {
-						q.add(new Point(nx, ny, p.cnt + 1));
+			int size = q.size();
+			for (int m = 0; m < size; m++) {				
+				Point p = q.poll();
+				int x = p.x;
+				int y = p.y;
+				for (int k = 0; k < 4; k++) {
+					int nx = x + dx[k];
+					int ny = y + dy[k];
+					if(0<= nx && nx < n && 0<= ny && ny < n && !visit[nx][ny]){
+						if(arr[nx][ny] == 0) {
+							q.add(new Point(nx, ny));
+							visit[nx][ny] = true;
+						}
+						else if(arr[nx][ny] != num){
+							return number;
+						}
 					}
-					else if(arr[nx][ny] != num){
-						tmp = Math.min(tmp, p.cnt);
-					}
-					visit[nx][ny] = true;
 				}
 			}
+			number++;
 		}
 	
-		return tmp;
+		return Integer.MAX_VALUE;
 	}
 
 	
 	private static void bfs(int i, int j) {
 		Queue<Point> q = new LinkedList<>();
 		q.add(new Point(i,j));
-		queue.add(new Point(i,j,0));
 		while(!q.isEmpty()) {
 			Point p = q.poll();
 			int x = p.x;
@@ -128,7 +126,6 @@ public class Main {
 					arr[nx][ny] = num;
 					visit[nx][ny] = true;
 					q.add(new Point(nx, ny));
-					queue.add(new Point(nx, ny,0));
 				}
 			}
 		}
