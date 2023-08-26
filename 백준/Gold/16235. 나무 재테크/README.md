@@ -4,11 +4,11 @@
 
 ### 성능 요약
 
-메모리: 134672 KB, 시간: 608 ms
+메모리: 17664 KB, 시간: 676 ms
 
 ### 분류
 
-자료 구조(data_structures), 구현(implementation), 시뮬레이션(simulation)
+자료 구조, 구현, 시뮬레이션
 
 ### 문제 설명
 
