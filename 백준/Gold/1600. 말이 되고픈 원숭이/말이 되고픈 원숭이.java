@@ -57,8 +57,8 @@ public class Main {
 			int x = p.x;
 			int y = p.y;
 			if(x == h - 1 && y == w - 1) {
-				ans = Math.min(ans, p.cnt);
-				continue;
+				ans = p.cnt;
+				break;
 			}
 			
 			if(p.hcnt + 1 <= k) {				
@@ -80,7 +80,6 @@ public class Main {
 					visit[p.hcnt][nx][ny] = true;					
 				}
 			}
-			
 		}
 	}
         
