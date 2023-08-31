@@ -72,7 +72,7 @@ public class Main {
     private static void bfs() {
        arr = new int[n + 1][n + 1];
        for (int i = 1; i < n + 1; i++) {
-    	   Queue<Point> q = new ArrayDeque<>();
+    	   PriorityQueue<Point> q = new PriorityQueue<>();
     	   int[] tmp = new int[n + 1];
     	   Arrays.fill(tmp, Integer.MAX_VALUE);
     	   
