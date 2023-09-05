@@ -89,13 +89,14 @@ public class Main {
 			for (int i = 1; i <= 3; i++) {
 				int nx = p.x + dx[p.d] * i;
 				int ny = p.y + dy[p.d] * i;
-				if(0 > nx || nx >= m || 0 > ny || ny >= n) continue;
-				if(visit[nx][ny][p.d]) continue;
-				if(arr[nx][ny] == 0) {
-					q.add(new Point(nx, ny, p.d, p.cnt + 1));
-					visit[nx][ny][p.d] = true;
-				}else 
-					break;
+				if(0<= nx && nx < m && 0<= ny && ny < n) {
+					if(visit[nx][ny][p.d]) continue;
+					if(arr[nx][ny] == 0) {
+						q.add(new Point(nx, ny, p.d, p.cnt + 1));
+						visit[nx][ny][p.d] = true;
+					}else 
+						break;
+				}
 				
 			}
 			//방향 전환
