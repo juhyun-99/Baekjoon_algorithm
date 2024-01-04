@@ -1,25 +1,24 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int arr[] = new int[10];
-        int sum = 0;
-        for (int i = 0; i < arr.length; i++) {
+
+        int[] arr = new int[10];
+        for (int i = 0; i < 10; i++) {
             arr[i] = Integer.parseInt(br.readLine());
         }
-
-        for (int i = 0; i < arr.length; i++) {
+        int sum = 0;
+        int ans = 0;
+        int diff = Integer.MAX_VALUE;
+        for (int i = 0; i < 10; i++) {
             sum += arr[i];
-
-            if(sum >= 100){
-                if(Math.abs(sum - 100) > Math.abs(sum - arr[i] - 100)){
-                    sum -= arr[i];
-                }
-                break;
+            if(diff >= Math.abs(100 - sum)){
+                ans = sum;
+                diff = Math.abs(100 - sum);
             }
         }
-        System.out.println(sum);
+        System.out.println(ans);
     }
 }
