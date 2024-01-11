@@ -6,18 +6,14 @@ import java.util.StringTokenizer;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer stk = new StringTokenizer(br.readLine());
-
-        int n = Integer.parseInt(stk.nextToken());
-        int a = Integer.parseInt(stk.nextToken());
-        int cnt = n / a;
-        int tmp = n / a;
-        
-        while(tmp >= a){
-            tmp /= a;
-            cnt += tmp;
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int a = Integer.parseInt(st.nextToken());
+        int ans = 0;
+        while(n >= a){
+            ans += n/a;
+            n/=a;
         }
-        System.out.println(cnt);
+        System.out.println(ans);
     }
-
 }
