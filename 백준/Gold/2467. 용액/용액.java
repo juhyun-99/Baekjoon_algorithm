@@ -19,11 +19,9 @@ public class Main {
 
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
-
         int tmp = Integer.MAX_VALUE;
 
         while(start < end){
-//            System.out.println(start + " " + end);
             int sum = arr[start] + arr[end];
             if(tmp > Math.abs(sum)){
                 min = arr[start];
@@ -37,8 +35,6 @@ public class Main {
                 start++;
             }
         }
-
         System.out.println(min + " " + max);
-
     }
 }
