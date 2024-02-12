@@ -4,15 +4,19 @@
 
 ### 성능 요약
 
-메모리: 42340 KB, 시간: 140 ms
+메모리: 22808 KB, 시간: 232 ms
 
 ### 분류
 
-정렬(sorting), 두 포인터(two_pointer)
+두 포인터
+
+### 제출 일자
+
+2024년 2월 12일 20:34:16
 
 ### 문제 설명
 
-<p>능력치가 다 다른 개발자 <mjx-container class="MathJax" jax="CHTML" style="font-size: 109%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D441 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi></math></mjx-assistive-mml><span aria-hidden="true" class="no-mathjax mjx-copytext">$N$</span></mjx-container>명이 팀 빌딩을 위해 한 줄로 서있다.</p>
+<p>개발자 <mjx-container class="MathJax" jax="CHTML" style="font-size: 109%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D441 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi></math></mjx-assistive-mml><span aria-hidden="true" class="no-mathjax mjx-copytext">$N$</span></mjx-container>명이 팀 빌딩을 위해 한 줄로 서있다.</p>
 
 <p>하나의 팀을 만들기 위해서는 개발자 2명이 반드시 모여야 한다.</p>
 
