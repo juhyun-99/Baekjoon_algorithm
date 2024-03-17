@@ -17,29 +17,23 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
-            Arrays.fill(dp[i], -1);
         }
 
-        System.out.println(recursive(0, n - 1));
+        for (int i = n - 1; i >= 0 ; i--) {
+            for (int j = 0; j <= n - 1; j++) {
+                if(i >= j){
+                    dp[i][j] = 0;
+                    continue;
+                }
+                if(arr[i] != arr[j]){
+                    dp[i][j] = Math.min(dp[i + 1][j] + 1, dp[i][j - 1] + 1);
+                }else{
+                    dp[i][j] += dp[i + 1][j - 1];
+                }
+            }
+        }
+
+        System.out.println(dp[0][n - 1]);
     }
 
-    private static int recursive(int start, int end) {
-        //System.out.println(start + " " + end);
-        if(start >= end) return 0;
-
-        if(dp[start][end] != -1) return dp[start][end];
-        int ret = 0;
-
-        //값이 다를 때
-        if(arr[start] != arr[end]){
-            //뒤쪽에 값을 넣었을 때와  앞쪽에 값을 넣었을 때랑 비교함.
-            ret = Math.min(recursive(start + 1, end) + 1, recursive(start, end - 1) + 1);
-        }
-        else{ //값이 같을 때
-            ret += recursive(start + 1, end - 1);
-        }
-
-        dp[start][end] = ret;
-        return dp[start][end];
-    }
 }
