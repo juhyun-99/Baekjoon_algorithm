@@ -59,20 +59,12 @@ public class Main {
                             dp[x][y][1][d] += dp[nx][ny][0][d];
                         }
                     }
+                    ans = Math.max(ans, dp[x][y][0][d]);
+                    ans = Math.max(ans, dp[x][y][1][d]);
                 }
             }
         }
 
-        for (int x = 0; x < n; x++) {
-            for (int y = 0; y < n; y++) {
-                for (int c = 0; c < 2; c++) {
-                    for (int d = 0; d < 4; d++) {
-                        ans = Math.max(ans, dp[x][y][c][d]);
-                    }
-                }
-            }
-        }
-        
         System.out.println(ans);
     }
 }
