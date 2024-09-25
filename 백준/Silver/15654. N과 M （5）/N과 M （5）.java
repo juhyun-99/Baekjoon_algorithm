@@ -2,53 +2,46 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.StringTokenizer;
 
 public class Main {
-    static boolean[] visit;
-    static int[] sel, arr;
+    static StringBuilder sb = new StringBuilder();
     static int n, m;
-    static  StringBuilder sb;
+    static int[] num, arr;
+    static boolean[] visit;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
-        sb = new StringBuilder();
-        
-        st = new StringTokenizer(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
         st = new StringTokenizer(br.readLine());
         arr = new int[n];
+        visit = new boolean[n];
         for (int i = 0; i < n; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
         }
         Arrays.sort(arr);
-        visit = new boolean[n];
-        sel = new int[m];
-        //cnt
-        recursive(0);
+        num = new int[m];
+        recur(0);
         System.out.println(sb);
     }
 
-    private static void recursive(int cnt) {
-        if(cnt == m){
+    public static void recur(int cur){
+        if(cur == m){
             for (int i = 0; i < m; i++) {
-                sb.append(sel[i] + " ");
+                sb.append(num[i] + " ");
             }
             sb.append("\n");
             return;
         }
 
         for (int i = 0; i < n; i++) {
-            if(!visit[i]){
-                sel[cnt] = arr[i];
-                visit[i] = true;
-                recursive(cnt + 1);
-                visit[i] = false;
-            }
-
+            if(visit[i]) continue;
+            num[cur] = arr[i];
+            visit[i] = true;
+            recur(cur + 1);
+            visit[i] = false;
         }
     }
-
-
 }
