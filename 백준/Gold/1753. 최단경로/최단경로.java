@@ -1,92 +1,78 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.*;
 
+class Point implements Comparable<Point>{
+    int to;
+    int dist;
+    public Point(int to, int dist){
+        this.to = to;
+        this.dist = dist;
+    }
+
+    @Override
+    public int compareTo(Point o) {
+        return this.dist - o.dist;
+    }
+
+}
 public class Main {
-	static class Vertex implements Comparable<Vertex> {
-		int v, w;
+    static ArrayList<Point>[] list;
+    static int v, e, k;
+    static int[] distArr;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
+        v = Integer.parseInt(st.nextToken());
+        e = Integer.parseInt(st.nextToken());
+        st = new StringTokenizer(br.readLine());
+        k = Integer.parseInt(st.nextToken());
+        list = new ArrayList[v + 1];
+        distArr = new int[v + 1];
+        for (int i = 0; i < v + 1; i++) {
+            list[i] = new ArrayList<>();
+        }
+        for (int i = 0; i < e; i++) {
+            st = new StringTokenizer(br.readLine());
+            int start = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
+            int dist = Integer.parseInt(st.nextToken());
+            list[start].add(new Point(end, dist));
+        }
 
-		public Vertex(int v, int w) {
-			this.v = v;
-			this.w = w;
-		}
+        Arrays.fill(distArr, Integer.MAX_VALUE);
+        dijk(k);
+        for (int i = 1; i < v + 1; i++) {
+            if(distArr[i] == Integer.MAX_VALUE){
+                sb.append("INF\n");
+                continue;
+            }
+            sb.append(distArr[i] + "\n");
+        }
+        System.out.println(sb);
 
-		@Override
-		public int compareTo(Vertex o) {
-			return Integer.compare(this.w, o.w);
-		}
-	}
 
-	private static final int INF = Integer.MAX_VALUE;
-	static int V, E, K, ans;
-	static List<Vertex>[] list;
-	static int[] dist;
+    }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
-		StringBuilder sb = new StringBuilder();
-		st = new StringTokenizer(br.readLine());
-		V = Integer.parseInt(st.nextToken());
-		E = Integer.parseInt(st.nextToken());
-		K = Integer.parseInt(br.readLine());
-		list = new ArrayList[V + 1];
-		dist = new int[V + 1];
-		for (int i = 0; i < V; i++) {
-			list[i] = new ArrayList<>();
-		}
+    private static void dijk(int k) {
+        distArr[k] = 0;
+        boolean[] visit = new boolean[v + 1];
+        PriorityQueue<Point> q = new PriorityQueue<>();
+        q.add(new Point(k, 0));
 
-		Arrays.fill(dist, INF);
-		for (int i = 1; i < V + 1; i++) {
-			list[i] = new ArrayList<>();
-		}
+        while(!q.isEmpty()){
+            Point p = q.poll();
+            visit[p.to] = true;
+            int now = p.to;
 
-		for (int i = 0; i < E; i++) {
-			st = new StringTokenizer(br.readLine());
-			int s = Integer.parseInt(st.nextToken());
-			int e = Integer.parseInt(st.nextToken());
-			int w = Integer.parseInt(st.nextToken());
-			list[s].add(new Vertex(e, w));
-		}
-
-		dijkstra(K);
-
-		for (int i = 1; i < V + 1; i++) {
-			sb.append(dist[i] == Integer.MAX_VALUE? "INF\n" : dist[i] + "\n");
-		}
-		
-		System.out.println(sb);
-	}
-
-	static void dijkstra(int start) {
-		PriorityQueue<Vertex> Q = new PriorityQueue<>();
-
-		boolean[] v = new boolean[V + 1];
-
-		Q.add(new Vertex(start, 0));
-
-		dist[start] = 0;
-
-		while (!Q.isEmpty()) {
-			Vertex p = Q.poll();
-			int minIdx = p.v;
-			if (v[minIdx] == true)
-				continue;
-
-			v[minIdx] = true;
-
-			for (Vertex next : list[minIdx]) {
-				if (dist[next.v] > dist[minIdx] + next.w) {
-					dist[next.v] = dist[minIdx] + next.w;
-					Q.add(new Vertex(next.v, dist[next.v]));
-				}
-			}
-		}
-	}
+            for(Point next : list[now]){
+                if(distArr[next.to] > distArr[now] + next.dist){
+                    distArr[next.to] = distArr[now] + next.dist;
+                    q.add(new Point(next.to, distArr[next.to]));
+                }
+            }
+        }
+    }
 }
