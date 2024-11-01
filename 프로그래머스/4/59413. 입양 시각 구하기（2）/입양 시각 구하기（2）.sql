@@ -1,7 +1,7 @@
 -- 코드를 입력하세요
-set @hour = -1;
+SET @hour := -1;
 
-select @hour := @hour + 1 as HOUR,
-(SELECT COUNT(*) FROM ANIMAL_OUTS WHERE HOUR(DATETIME) = @hour)
+SELECT (@hour := @hour + 1) as HOUR,
+(SELECT COUNT(*) FROM ANIMAL_OUTS WHERE HOUR(DATETIME) = @hour) as COUNT
 FROM ANIMAL_OUTS
-WHERE @hour <= 22
+WHERE @hour< 23
